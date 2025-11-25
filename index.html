@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postres Deliciosos</title>
+
+    <!-- Estilos -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffe7f3;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #ff5599;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .contenedor {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .tarjeta {
+            background: white;
+            width: 300px;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .tarjeta img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .tarjeta h3 {
+            margin: 10px 0;
+            color: #ff5599;
+        }
+
+        #qr-section {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        Postres Deliciosos
+    </header>
+
+    <div class="contenedor">
+        <!-- Cheesecake -->
+        <div class="tarjeta">
+            <img src="https://images.unsplash.com/photo-1604152135912-04a022e23696" alt="Cheesecake">
+            <h3>Pastel Cheesecake</h3>
+            <p>Un delicioso cheesecake cremoso con base crujiente.</p>
+        </div>
+
+        <!-- Pay de helado de guayaba -->
+        <div class="tarjeta">
+            <img src="https://images.unsplash.com/photo-1621996346565-af1a40cc5a29" alt="Pay de helado de guayaba">
+            <h3>Pay de Helado de Guayaba</h3>
+            <p>Refrescante y dulce pay de helado con sabor a guayaba.</p>
+        </div>
+    </div>
+
+    <div id="qr-section">
+        <h2>Escanea este código QR para acceder a la página</h2>
+        <div id="qrcode"></div>
+    </div>
+
+    <!-- Librería para generar QR -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        var urlPagina = window.location.href;
+
+        new QRCode(document.getElementById("qrcode"), {
+            text: urlPagina,
+            width: 180,
+            height: 180,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+    </script>
+
+</body>
+</html>
