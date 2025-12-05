@@ -1,103 +1,263 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Postres Deliciosos</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cheesecake y Carlota de Guayaba</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7e6f0;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
 
-    <!-- Estilos -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #ffe7f3;
-            margin: 0;
-            padding: 0;
-        }
+    #qr-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
 
-        header {
-            background: #ff5599;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-        }
+    #main-content {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1s ease-in-out;
+      width: 100%;
+    }
 
-        .contenedor {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
 
-        .tarjeta {
-            background: white;
-            width: 300px;
-            margin: 15px;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
-            text-align: center;
-        }
+    .cake-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
 
-        .tarjeta img {
-            width: 100%;
-            border-radius: 10px;
-        }
+    .cake-card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 280px;
+    }
 
-        .tarjeta h3 {
-            margin: 10px 0;
-            color: #ff5599;
-        }
+    .cake-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
 
-        #qr-section {
-            text-align: center;
-            margin-top: 30px;
-        }
-    </style>
+    h1, h2, h3 {
+      color: #ff5599;
+    }
+
+    ul {
+      text-align: left;
+      margin-top: 30px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* --- BOTÓN DE INFORMACIÓN MEJORADO Y CENTRADO --- */
+    .info-btn {
+      display: block;
+      margin: 20px auto 30px auto;
+      padding: 15px 25px;
+      background: #ff5599;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: bold;
+      width: 85%;
+      max-width: 320px;
+    }
+
+    .info-btn:hover {
+      background: #ff2a7a;
+    }
+
+    @media (max-width: 480px) {
+      .info-btn {
+        font-size: 20px;
+        padding: 18px 28px;
+      }
+    }
+
+    /* --- MODAL --- */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-content {
+      background: white;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 700px;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .close {
+      color: #ff5599;
+      float: right;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: #ff2a7a;
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        Postres Deliciosos
-    </header>
+  <!-- Sección de QR -->
+  <div id="qr-section">
+    <h2>Escanea este código QR para acceder a la página</h2>
+    <div id="qrcode"></div>
+  </div>
 
-    <div class="contenedor">
-        <!-- Cheesecake -->
-        <div class="tarjeta">
-            <img src="https://images.unsplash.com/photo-1604152135912-04a022e23696" alt="Cheesecake">
-            <h3>Pastel Cheesecake</h3>
-            <p>Un delicioso cheesecake cremoso con base crujiente.</p>
-        </div>
+  <!-- Sección principal -->
+  <div id="main-content">
+    <h1>Cheesecake y Carlota de Guayaba</h1>
 
-        <!-- Pay de helado de guayaba -->
-        <div class="tarjeta">
-            <img src="https://images.unsplash.com/photo-1621996346565-af1a40cc5a29" alt="Pay de helado de guayaba">
-            <h3>Pay de Helado de Guayaba</h3>
-            <p>Refrescante y dulce pay de helado con sabor a guayaba.</p>
-        </div>
+    <!-- 🔥 BOTÓN DE INFORMACIÓN AHORA DEBAJO DEL TÍTULO -->
+    <button class="info-btn" id="openModal">Información</button>
+
+    <p>Cheesecake y Carlota de Guayaba❤️</p>
+
+    <div class="cake-container">
+      <div class="cake-card">
+        <h3>Cheesecake de Guayaba</h3>
+        <img src="https://bing.com/th?id=OSK.b39843121ee4d89081ff5d23067f0a1e" 
+             alt="Cheesecake de guayaba">
+        <p>Un cheesecake suave y cremoso con el toque dulce y tropical de la guayaba.</p>
+      </div>
+
+      <div class="cake-card">
+        <h3>Carlota de Guayaba</h3>
+        <img src="https://noticias-ahora.com/wp-content/uploads/2017/09/gauaya.jpg" 
+             alt="Carlota de guayaba">
+        <p>Una carlota cremosa y fresca, preparada con el exquisito sabor de la guayaba.</p>
+      </div>
     </div>
 
-    <div id="qr-section">
-        <h2>Escanea este código QR para acceder a la página</h2>
-        <div id="qrcode"></div>
+    <h2>Integrantes</h2>
+    <ul>
+      <li>Zugeili Rubi Hernández Soto</li>
+      <li>Miguel Ángel Martínez Jiménez</li>
+      <li>Valeria Miranda del Río</li>
+      <li>Josmar Narváez Blas</li>
+      <li>Yenifer Quintanar Chacón</li>
+    </ul>
+
+  </div>
+
+  <!-- MODAL -->
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+
+      <h2>Deshidratación de Guayaba en Horno</h2>
+      <p>
+        Realizar en equipo el proceso de deshidratación de guayaba utilizando un horno eléctrico,
+        controlando temperatura y tiempo para obtener un producto seguro, estable y de mayor vida útil.
+      </p>
+
+      <h3>Materiales</h3>
+      <ul>
+        <li>Guayabas frescas</li>
+        <li>Tabla para cortar</li>
+        <li>Cuchillo desinfectado</li>
+        <li>Bandejas para horno</li>
+        <li>Papel encerado o tapete de silicón</li>
+        <li>Horno eléctrico</li>
+        <li>Guantes de cocina</li>
+        <li>Recipiente hermético</li>
+        <li>Agua potable y solución desinfectante</li>
+      </ul>
+
+      <h3>Procedimiento</h3>
+      <ol>
+        <li><b>Selección y limpieza:</b> Elegimos guayabas en buen estado, las lavamos y desinfectamos.</li>
+        <li><b>Corte:</b> Cortamos la fruta en rodajas delgadas y uniformes.</li>
+        <li><b>Preparación de bandejas:</b> Colocamos papel encerado y acomodamos las rebanadas.</li>
+        <li><b>Precalentamiento del horno:</b> Ajustamos a 60–70 °C.</li>
+        <li><b>Deshidratación:</b><br>
+             – Introdujimos las bandejas.<br>
+             – Mantuvimos la puerta entreabierta.<br>
+             – Tiempo total: 4 a 6 horas.</li>
+        <li><b>Verificación:</b> Revisamos textura firme y sin humedad.</li>
+        <li><b>Conservación:</b> Guardamos en recipiente hermético.</li>
+      </ol>
+
+      <h3>Conclusiones</h3>
+      <ul>
+        <li>La deshidratación en horno es eficiente y rápida.</li>
+        <li>El trabajo en equipo permitió mejores resultados.</li>
+        <li>El producto final conserva aroma y sabor por más tiempo.</li>
+      </ul>
+
     </div>
+  </div>
 
-    <!-- Librería para generar QR -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- Librería QR -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-    <script>
-        var urlPagina = window.location.href;
+  <script>
+    // QR dinámico
+    var urlPagina = "https://alexis-hdz.github.io/chescake/";
+    new QRCode(document.getElementById("qrcode"), {
+      text: urlPagina,
+      width: 260,
+      height: 260,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
 
-        new QRCode(document.getElementById("qrcode"), {
-            text: urlPagina,
-            width: 180,
-            height: 180,
-            colorDark : "#000000",
-            colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
-        });
-    </script>
+    // Mostrar contenido después de 9s
+    setTimeout(() => {
+      document.getElementById("qr-section").style.display = "none";
+      document.getElementById("main-content").style.display = "block";
+    }, 9000);
+
+    // Modal
+    const modal = document.getElementById("infoModal");
+    const open = document.getElementById("openModal");
+    const close = document.getElementById("closeModal");
+
+    open.onclick = () => modal.style.display = "block";
+    close.onclick = () => modal.style.display = "none";
+    window.onclick = (e) => { if (e.target == modal) modal.style.display = "none"; };
+  </script>
 
 </body>
 </html>
